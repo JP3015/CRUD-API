@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <h1>Lista de pedidos</h1>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário</th>
+            <th>Valor Total</th>
+            <th></th>
+        </tr>
+        <tr th:each="item:${Pedidos}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.quantidade}"></td>
+            <td th:text="${item.valor_uni}"></td>
+            <td th:text="${item.valor_total}"></td>  
+            <td>
+                <form action="#" th:action="@{'/pedido/deletar/{id}'(id=${item.id})}" th:method="delete" >
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit" id="submitButton">Deletar</button>
+                </form>
+                <td>
+                    <a class="btn btn-outline-dark" th:href="@{/pedido/editar/} + ${item.id}">Editar</a>
+                </td>
+            </td>
+        </tr>
+    </table>
+    </div>
+
+</div>
+
+</body>
+</html>
